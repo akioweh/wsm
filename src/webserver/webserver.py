@@ -24,9 +24,9 @@ def run(websocket_ip: str = None, websocket_port: int = 6969, webserver_port: in
                 self.end_headers()
                 self.wfile.write(template_html.encode('utf-8'))
 
-        def handle(self) -> None:
+        def handle_one_request(self) -> None:
             try:
-                super().handle()
+                super().handle_one_request()
             except ConnectionResetError:
                 pass
 
