@@ -67,7 +67,7 @@ class Client:
                         else:  # Actual command
                             op = data[1:4].upper()
                             msg = data[5:]
-                            if len(data) >= 5 and data[4] != ' ':
+                            if (len(data) >= 5 and data[4] != ' ') or len(data) < 4:
                                 raise ValueError
                     else:  # Message
                         op = 'MSG'
