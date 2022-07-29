@@ -1,10 +1,10 @@
-from websockets import WebSocketClientProtocol
+from websockets import WebSocketServerProtocol
 
 
 class Client:
     """client model class providing data storage and methods for socket communication"""
-    def __init__(self, ws: WebSocketClientProtocol, name: str = 'Unknown'):
-        self.ws: WebSocketClientProtocol = ws
+    def __init__(self, ws: WebSocketServerProtocol, name: str = 'Unknown'):
+        self.ws: WebSocketServerProtocol = ws
         self.display_name: str = name
 
     @property
