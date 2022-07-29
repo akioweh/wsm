@@ -7,8 +7,10 @@ from .client_model import Client
 
 
 class Server:
-    def __init__(self, interface: str = '', port: int = 6969):
-        self.addr = (interface, port)
+    def __init__(self, host: str = '', port: int = 6969):
+        if host == 'all':
+            host = ''
+        self.addr = (host, port)
         self.clients: list[Client] = []
         self.ws = None
 
