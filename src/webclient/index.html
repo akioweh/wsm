@@ -26,6 +26,7 @@
         newMessage.className = "chat";
         newMessage.textContent = message;
         chatbox.appendChild(newMessage);
+        chatbox.scrollTop = chatbox.scrollHeight;
     };
 
     printMessage('TIP: send /sdn [name] to change your display name');
