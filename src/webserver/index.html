@@ -2,82 +2,7 @@
 <html lang="en">
 <head>
     <title>Super secure chat room</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            margin: 20px auto;
-            font-family: "Lato";
-            font-weight: 300;
-        }
-
-        form {
-            padding: 15px 25px;
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        form label {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        input {
-            font-family: "Lato";
-        }
-
-        #wrapper{
-            margin: 0 auto;
-            padding-bottom: 25px;
-            background: #eee;
-            width: 600px;
-            max-width: 100%;
-            border: 2px solid #212121;
-            border-radius: 4px;
-        }
-
-        #chatbox {
-            text-align: left;
-            margin: 0 auto;
-            margin-bottom: 25px;
-            padding: 10px;
-            background: #fff;
-            height: 300px;
-            width: 530px;
-            border: 1px solid #a7a7a7;
-            overflow: auto;
-            border-radius: 4px;
-            border-bottom: 4px solid #a7a7a7;
-        }
-
-        #inputbox {
-            flex: 1;
-            border-radius: 4px;
-            border: 1px solid #ff9800;
-        }
-
-        #submitbtn{
-            background: #ff9800;
-            border: 2px solid #e65100;
-            color: white;
-            padding: 4px 10px;
-            font-weight: bold;
-            border-radius: 4px;
-        }
-
-        #menu {
-            padding: 15px 25px;
-            display: flex;
-        }
-
-        #menu p.welcome {
-            flex: 1;
-        }
-        </style>
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -101,6 +26,7 @@
         newMessage.className = "chat";
         newMessage.textContent = message;
         chatbox.appendChild(newMessage);
+        chatbox.scrollTop = chatbox.scrollHeight;
     };
 
     printMessage('TIP: send /sdn [name] to change your display name');
