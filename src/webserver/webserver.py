@@ -24,6 +24,12 @@ def run(websocket_ip: str = None, websocket_port: int = 6969, webserver_port: in
                 self.end_headers()
                 self.wfile.write(template_html.encode('utf-8'))
 
+        def handle(self) -> None:
+            try:
+                super().handle()
+            except ConnectionResetError:
+                pass
+
     with socketserver.TCPServer(('', webserver_port), Handler) as server:
         print('Webserver serving at port', webserver_port)
         server.serve_forever()
