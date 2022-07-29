@@ -9,10 +9,9 @@ class Client:
 
     @property
     def name(self):
-        return self.ws.remote_address
-
-    async def send(self, data) -> None:
-        await self.ws.send(data)
+        if isinstance(addr := self.ws.remote_address, tuple):
+            addr = f'{addr[0]}:{addr[1]}'
+        return addr
 
     def __getattr__(self, item):
         return getattr(self.ws, item)
