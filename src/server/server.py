@@ -7,20 +7,18 @@ from .client_model import Client
 
 
 class Server:
-    def __init__(self, host: str = '', port: int = 6969):
-        if host == 'all':
-            host = ''
-        self.addr = (host, port)
+    def __init__(self, port: int = 6969):
+        self.port = port
         self.clients: list[Client] = []
         self.ws = None
 
     async def serve(self):
         """start websocket, listens for and accepts new clients indefinitely"""
-        print('Starting server')
-        self.ws = await websockets.serve(self.handle, self.addr[0], self.addr[1])
-        print(f'Server running at {self.addr}')
+        print('Starting Chat Server')
+        self.ws = await websockets.serve(self.handle, '', self.port)
+        print(f'Chat Server running at port {self.port}')
         await self.ws.serve_forever()
-        print('Server closed')
+        print('Chat Server closed')
 
     async def broadcast(self, msg):
         await asyncio.gather(*(client.ws.send(msg) for client in self.clients))
@@ -58,4 +56,4 @@ class Server:
         except (KeyboardInterrupt, EOFError):
             print('Received stopping signal')
         self.ws.close()
-        print('Server closed')
+        print('Chat Server closed')
