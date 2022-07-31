@@ -28,6 +28,8 @@ class Handler(BaseHTTPRequestHandler):
 
 class WebServer(ThreadingTCPServer):
     """same as socketserver.ThreadingTCPServer but with a timeout"""
+    daemon_threads = True  # prevent server from blocking on exit
+
     def finish_request(self, request, client_address):
         request.settimeout(60)
         super().finish_request(request, client_address)
