@@ -1,29 +1,32 @@
 import asyncio
+from ssl import SSLContext
 
 import websockets
 from websockets import ConnectionClosedError
+from websockets.legacy.server import WebSocketServerProtocol
 
 from .client_model import Client
 
 
 class Server:
-    def __init__(self, port: int = 6969):
-        self.port = port
+    def __init__(self, port: int = 6969, ssl_context: SSLContext = None):
+        self.port: int = port
         self.clients: list[Client] = []
-        self.ws = None
+        self.ws: WebSocketServerProtocol | None = None
+        self.ssl_context: SSLContext = ssl_context
 
     async def serve(self):
         """start websocket, listens for and accepts new clients indefinitely"""
         print('Starting Chat Server')
-        self.ws = await websockets.serve(self.handle, '', self.port)
+        self.ws = await websockets.serve(self.handle, '', self.port, ssl=self.ssl_context)
         print(f'Chat Server running at port {self.port}')
         await self.ws.serve_forever()
         print('Chat Server closed')
 
-    async def broadcast(self, msg):
+    async def broadcast(self, msg: str | bytes):
         await asyncio.gather(*(client.ws.send(msg) for client in self.clients))
 
-    async def handle(self, ws):
+    async def handle(self, ws: WebSocketServerProtocol):
         client = Client(ws)
         print(f'[{client.name}] connected')
         self.clients.append(client)
