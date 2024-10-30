@@ -6,12 +6,13 @@ class Client:
     def __init__(self, ws: WebSocketServerProtocol, name: str = 'Unknown'):
         self.ws: WebSocketServerProtocol = ws
         self.display_name: str = name
+        self.address: tuple[str, int] = self.ws.remote_address
 
     @property
-    def name(self):
-        if isinstance(addr := self.ws.remote_address, tuple):
-            addr = f'{addr[0]}:{addr[1]}'
-        return addr
+    def name(self) -> str:
+        if self.address is None and isinstance(addr := self.ws.remote_address, tuple):
+            self.address = addr
+        return f'{self.address[0]}:{self.address[1]}' if self.address else 'Unknown'
 
     def __getattr__(self, item):
         return getattr(self.ws, item)
