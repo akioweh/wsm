@@ -2,5 +2,6 @@
 __pycache__/
 *.py[cod]
 /wsm.iml
+venv/
 
 run.sh
