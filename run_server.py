@@ -1,6 +1,5 @@
 import argparse
 import ssl
-import sys
 
 from src.server import Server
 
@@ -18,9 +17,5 @@ if __name__ == '__main__':
         ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         ssl_context.load_cert_chain(args.certfile, args.keyfile)
 
-    try:
-        port = int(sys.argv[1])
-    except IndexError:
-        port = 6969
-    server = Server(port, ssl_context)
+    server = Server(args.port, ssl_context)
     server.run()
