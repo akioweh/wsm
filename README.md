@@ -10,7 +10,7 @@ a idfk messaging program using (web)sockets
 
 the three run_*.py files runs each of the three python scripts respectively, with optional commandline arguments (positional):
  - `run_client`: `[uri]` (uri of the server to connect to, i.e. ws://ip:port) 
- - `run_server`: `-p [port] --certfile [path]` (port to listen for connections on; clients must connect to this... and an optional TSL certificate file to enable `wss://`
+ - `run_server`: `-p [port] --keyfile [path] --certfile [path]` (port to listen for connections on; clients must connect to this... and an optional TSL certificate files to enable `wss://`
  - `run_webserver`: `[websocket ip]` `[websocket port]` `[webserver port]` (external ip and port of chat server the webclient tries to connect to, port of webserver to listen on... 80 to access directly in browser without specifying in url) 
  (use `this` in place of websocket ip to automatically get machine's external ip - useful if chatserver is hosted on the same machine)
 
